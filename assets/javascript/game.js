@@ -1,3 +1,4 @@
+// add cats as objects to list of all cats with properties for their name, image file name, and stats (hp and attack)
 var cats = {
     fluffy: {
         name: "Fluffy",
@@ -68,18 +69,38 @@ function showRosterLineup() {
         // create new div elements with images for each cat in the roster
         var catRosterTile = $("<div>")
             .addClass("border border-dark d-inline-block cat-roster-tile")
-            .attr('id', "cat-"+[j])
-            .html("<img src=assets/images/" + catRoster[j].imgName + ".jpg class='cat-roster-img'><p class='cat-stats cat-names'>" + catRoster[j].name + "</p><p class='cat-stats'>HP: " + catRoster[j].hp + "</p>");
+            .attr('id', "cat-" + [j])
+            .html("<img src=assets/images/" + catRoster[j].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + catRoster[j].name + "</p><p class='cat-stats'>HP: " + catRoster[j].hp + "</p>");
 
-        // determine how to add unique ID to each tile
         // append catRosterImg div elements to catRosterBox in html
         catRosterBox.append(catRosterTile);
     }
 }
 
+var playersCatBox = $("#players-cat-box");
+
 // on first click, select clicked cat for player and move picture/stats to selected-cat-box
-$(".cat-roster-tile").on("click", function() {
-    console.log();
+$(".cat-roster-tile").on("click", function () {
+    console.log(catRoster.length);
+    for (var i = 0; i < catRoster.length; i++) {
+        if (playersCat.length === 0) {
+            console.log(this.id);
+            if (this.id === "cat-" + [i]) {
+                console.log(this.id + [i]);
+                playersCat.push(catRoster[i]);
+                console.log(catRoster[i]);
+                console.log(playersCat[0]);
+                var playersCatTile = $("<div>")
+                    .addClass("border border-primary d-inline-block players-cat-tile")
+                    .attr('id', "players-cat")
+                    .html("<img src=assets/images/" + playersCat[0].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + playersCat[0].name + "</p><p class='cat-stats'>HP: " + playersCat[0].hp + "</p>");
+
+            playersCatBox.append(playersCatTile);
+            console.log(catRoster);
+            }
+        }
+    }
+
 })
 // on second click, select clicked cat as challenger and move picture/stats to defender-area
 // click attack button to damage challenger
