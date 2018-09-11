@@ -1,0 +1,44 @@
+.jumbotron {
+    background-image: url("https://i.pinimg.com/236x/22/78/15/2278154d34d274fc1c7b1ecc7136f095--animal-patterns-print-patterns.jpg");
+    height: 100%
+}
+
+.solid-area {
+    height: 200px;
+    background-color: wheat;
+}
+
+.game-header {
+    margin-top: 0px;
+}
+
+.cat-roster-img {
+    height: 80px;
+}
+
+.cat-roster-tile {
+    margin: 5px 10px 5px 0px;
+    overflow: hidden;
+}
+
+.cat-stats {
+    margin-bottom: 0px !important;
+    background-color: white;
+}
+
+.cat-names {
+    font-weight: bolder;
+}
+
+#black-cat {
+    float: right;
+    height: 100px;
+    position: relative;
+    top: -80px;
+}
+
+@media (max-width: 1200px) {
+    .cat-roster-img {
+        height: 75px;
+    }
+}
