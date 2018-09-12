@@ -79,7 +79,7 @@ function showRosterLineup() {
 
 var playersCatBox = $("#players-cat-box");
 
-// on first click, select clicked cat for player and move picture/stats to selected-cat-box
+// if player's cat is not assigned, select clicked cat for player and move picture/stats to players-cat-box
 $(".cat-roster-tile").on("click", function () {
     console.log(catRoster.length);
     for (var i = 0; i < catRoster.length; i++) {
@@ -91,18 +91,25 @@ $(".cat-roster-tile").on("click", function () {
                 console.log(catRoster[i]);
                 console.log(playersCat[0]);
                 var playersCatTile = $("<div>")
-                    .addClass("border border-primary d-inline-block players-cat-tile")
+                    .addClass("border border-dark d-inline-block players-cat-tile")
                     .attr('id', "players-cat")
                     .html("<img src=assets/images/" + playersCat[0].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + playersCat[0].name + "</p><p class='cat-stats'>HP: " + playersCat[0].hp + "</p>");
-
-            playersCatBox.append(playersCatTile);
-            console.log(catRoster);
+                playersCatBox.append(playersCatTile);
+                console.log(catRoster);
+                console.log(playersCat.length);
+                catRoster.splice(i,1);
+                console.log(catRoster);
+                catRosterBox.html("");
+                showRosterLineup();
             }
+        } else if (defenderCat.length === 0) {
+            // on subsequent clicks on cat, select clicked cat as challenger and move picture/stats to defender-area
+            console.log(this.id);
         }
+
     }
 
 })
-// on second click, select clicked cat as challenger and move picture/stats to defender-area
 // click attack button to damage challenger
 // challenger automatically counters attack
 // if player's cat's hp <= 0, player loses
