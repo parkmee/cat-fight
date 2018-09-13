@@ -101,17 +101,30 @@ catRosterTile.on("click", function () {
                     .attr('id', "players-cat")
                     .html("<img src=assets/images/" + playersCat[0].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + playersCat[0].name + "</p><p class='cat-stats'>HP: " + playersCat[0].hp + "</p>");
                 playersCatBox.append(playersCatTile);
-                catRoster.splice(i, 1);
-                
+                catRoster.splice(i, 1,"");
                 // remove selected cat tile from catRosterBox
                 $("#cat-"+i).remove();
             }
         }
         playerSelected = true;
-        console.log(catRoster);
     } else if (challengerSelected === false) {
+        for (var i = 0; i < catRoster.length; i++) {
+            if (this.id === "cat-" + [i]) {
+                challengerCat.push(catRoster[i]);
+                var challengerCatTile = $("<div>")
+                    .addClass("border border-dark d-inline-block challenger-cat-tile")
+                    .attr('id', "challenger-cat")
+                    .html("<img src=assets/images/" + challengerCat[0].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + challengerCat[0].name + "</p><p class='cat-stats'>HP: " + challengerCat[0].hp + "</p>");
+                challengerCatBox.append(challengerCatTile);
+                catRoster.splice(i, 1, "");
+                console.log(catRoster);
+                $("#cat-"+i).remove();
+            }
+        }
+
         console.log("level 2");
         console.log(catRoster);
+        challengerSelected = true;
     }
 
 /*     for (var j = 0; j < catRoster.length; j++) {
