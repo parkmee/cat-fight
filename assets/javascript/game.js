@@ -4,45 +4,51 @@ var cats = {
         name: "Fluffy",
         imgName: "fluffy",
         hp: 345,
-        attack: 29,
+        baseAttack: 8,
+        counterAttack: 21,
     },
     gus: {
         name: "Gus",
         imgName: "gus",
         hp: 280,
-        attack: 34,
+        baseAttack: 7,
+        counterAttack: 22,
     },
     princess: {
         name: "Princess",
         imgName: "princess",
-        hp: 400,
-        attack: 26,
+        hp: 275,
+        baseAttack: 8,
+        counterAttack: 27,
     },
     minx: {
         name: "Minx",
         imgName: "minx",
-        hp: 150,
-        attack: 23,
+        hp: 210,
+        baseAttack: 6,
+        counterAttack: 24,
     },
     mittens: {
         name: "Mittens",
         imgName: "mittens",
         hp: 325,
-        attack: 36,
+        baseAttack: 7,
+        counterAttack: 23,
     },
-    mrCat: {
-        name: "Mr. Cat",
-        imgName: "mr_cat",
-        hp: 275,
-        attack: 40,
-    },
-    tiger: {
-        name: "Tiger",
-        imgName: "tiger",
-        hp: 175,
-        attack: 55,
-    },
-
+    /*  mrCat: {
+         name: "Mr. Cat",
+         imgName: "mr_cat",
+         hp: 275,
+         attack: 6,
+         counterAttack: 12,
+     },
+     tiger: {
+         name: "Tiger",
+         imgName: "tiger",
+         hp: 175,
+         attack: 8,
+         counterAttack: 9,
+     }, */
 }
 
 // cat arrays
@@ -84,6 +90,8 @@ function showRosterLineup() {
 var playersCatBox = $("#players-cat-box");
 var challengerCatBox = $("#challenger-cat-box");
 var catRosterTile = $(".cat-roster-tile");
+var defeatedCatBox = $("#defeated-cat-box");
+var gameMsgText = $("#game-msg-text");
 
 function selectPlayer() {
 
@@ -97,13 +105,13 @@ catRosterTile.on("click", function () {
             if (this.id === "cat-" + [i]) {
                 playersCat.push(catRoster[i]);
                 var playersCatTile = $("<div>")
-                    .addClass("border border-dark d-inline-block players-cat-tile")
+                    .addClass("border border-dark d-inline-block fight-tile players-cat-tile")
                     .attr('id', "players-cat")
-                    .html("<img src=assets/images/" + playersCat[0].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + playersCat[0].name + "</p><p class='cat-stats'>HP: " + playersCat[0].hp + "</p>");
+                    .html("<img src=assets/images/" + playersCat[0].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + playersCat[0].name + "</p><p class='cat-stats' id='player-hp-text'>HP: " + playersCat[0].hp + "</p>");
                 playersCatBox.append(playersCatTile);
-                catRoster.splice(i, 1,"");
+                catRoster.splice(i, 1, "");
                 // remove selected cat tile from catRosterBox
-                $("#cat-"+i).remove();
+                $("#cat-" + i).remove();
             }
         }
         playerSelected = true;
@@ -112,99 +120,71 @@ catRosterTile.on("click", function () {
             if (this.id === "cat-" + [i]) {
                 challengerCat.push(catRoster[i]);
                 var challengerCatTile = $("<div>")
-                    .addClass("border border-dark d-inline-block challenger-cat-tile")
+                    .addClass("border border-dark d-inline-block fight-tile challenger-cat-tile")
                     .attr('id', "challenger-cat")
-                    .html("<img src=assets/images/" + challengerCat[0].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + challengerCat[0].name + "</p><p class='cat-stats'>HP: " + challengerCat[0].hp + "</p>");
+                    .html("<img src=assets/images/" + challengerCat[0].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + challengerCat[0].name + "</p><p class='cat-stats' id='challenger-hp-text'>HP: " + challengerCat[0].hp + "</p>");
                 challengerCatBox.append(challengerCatTile);
                 catRoster.splice(i, 1, "");
                 console.log(catRoster);
-                $("#cat-"+i).remove();
+                $("#cat-" + i).remove();
             }
         }
 
         console.log("level 2");
         console.log(catRoster);
         challengerSelected = true;
+        gameMsgText.text("Fight!");
+        console.log(playersCat[0].hp);
+        console.log(challengerCat[0]);
     }
-
-/*     for (var j = 0; j < catRoster.length; j++) {
-        // create new div elements with images for each cat in the roster
-        var catRosterTile = $("<div>")
-            .addClass("border border-dark d-inline-block cat-roster-tile")
-            .attr('id', "cat-" + [j])
-            .html("<img src=assets/images/" + catRoster[j].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + catRoster[j].name + "</p><p class='cat-stats'>HP: " + catRoster[j].hp + "</p>");
-        console.log("inside");
-        catRosterBox.append(catRosterTile);
-    }
- */    console.log("what");
+    console.log("what");
 
 });
 
-/* // if player's cat is not assigned, select clicked cat for player and move picture/stats to players-cat-box
-catRosterTile.on("click", function () {
-    /*     if (playerSelected) {
-            // on subsequent clicks on cat, select clicked cat as challenger and move picture/stats to defender-area
-            console.log(this.id);
-            for (var i = 0; i < catRoster.length; i++) {
-                if (this.id === "cat-" + [i]) {
-                    console.log(this.id + " index: " + [i]);
-                    challengerCat.push(catRoster[i]);
-                    console.log(catRoster[i]);
-                    console.log(challengerCat[0]);
-                    var challengerCatTile = $("<div>")
-                        .addClass("border border-dark d-inline-block challenger-cat-tile")
-                        .attr('id', "challenger-cat")
-                        .html("<img src=assets/images/" + challengerCat[0].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + challengerCat[0].name + "</p><p class='cat-stats'>HP: " + challengerCat[0].hp + "</p>");
-                    challengerCatBox.append(challengerCatTile);
-                    console.log(catRoster);
-                    console.log(challengerCat.length);
-                    catRoster.splice(i, 1);
-                    console.log(catRoster);
-                    catRosterBox.html("");
-                    showRosterLineup();
-                }
-            }
-        } */
-
-
-/* $(".cat-roster-tile").on("click", function () {
-    if (playersCat.length == 0) {
-        for (var i = 0; i < catRoster.length; i++) {
-            if (this.id === "cat-" + [i]) {
-                playersCat.push(catRoster[i]);
-                var playersCatTile = $("<div>")
-                    .addClass("border border-dark d-inline-block players-cat-tile")
-                    .attr('id', "players-cat")
-                    .html("<img src=assets/images/" + playersCat[0].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + playersCat[0].name + "</p><p class='cat-stats'>HP: " + playersCat[0].hp + "</p>");
-                playersCatBox.append(playersCatTile);
-                catRoster.splice(i, 1);
-                catRosterBox.html("");
-                showRosterLineup();
-                playerSelected = true;
-            }
-        } 
-    } else {
-        console.log("Hi");
-    }
-    console.log(catRoster.length);
-    console.log(playersCat.length);
-    console.log(challengerCat.length);
-    console.log(playerSelected);
-
-}); */
-
-
-
-
-
-
-
-
-
-
-
+var atkBtn = $("#atk-btn")
+var attack = 0;
 
 // click attack button to damage challenger
+atkBtn.on("click", function () {
+    if (playerSelected === true && challengerSelected === true) {
+        attack = attack + playersCat[0].baseAttack;
+        challengerCat[0].hp = challengerCat[0].hp - attack;
+        console.log(attack);
+        console.log(challengerCat[0].hp);
+        playersCat[0].hp = playersCat[0].hp - challengerCat[0].counterAttack;
+        console.log(playersCat[0].hp);
+        $("#player-hp-text").text("HP: " + playersCat[0].hp);
+        $("#challenger-hp-text").text("HP: " + challengerCat[0].hp);
+
+        if (playersCat[0].hp <= 0) {
+            gameMsgText.text("Me-OW! You lose!");
+
+            // reset game
+            newGame = true;
+        }
+
+        if (challengerCat[0].hp <= 0) {
+            defeatedCats.push(challengerCat[0]);
+            console.log(defeatedCats);
+            challengerCat.length = 0;
+            $(".challenger-cat-tile").remove();
+            gameMsgText.text("Select a new challenger!");
+            for (var i = 0; i < defeatedCats.length; i++) {
+                var defeatedCatTile = $("<div>")
+                .addClass("border border-dark d-inline-block defeated-tile")
+                .html("<img src=assets/images/" + defeatedCats[i].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + defeatedCats[i].name + "</p>");
+            }
+            defeatedCatBox.append(defeatedCatTile);
+            challengerSelected = false;
+        }
+
+        if (defeatedCatBox.length == 4) {
+            gameMsgText.text("You win!");
+        }
+    } else {
+        gameMsgText.text("Yoo hoo! Select your cats first!");
+    }
+})
 // challenger automatically counters attack
 // if player's cat's hp <= 0, player loses
 // show losing game message and reset

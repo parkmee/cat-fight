@@ -1,3 +1,6 @@
+body {
+    justify-content: center;
+}
 .jumbotron {
     background-image: url("https://i.pinimg.com/236x/22/78/15/2278154d34d274fc1c7b1ecc7136f095--animal-patterns-print-patterns.jpg");
     height: 280px;
@@ -43,6 +46,10 @@
 
 .vs-text {
     padding-top: 30px;
+}
+
+.atk-btn {
+    margin-top: 10px;
 }
 
 #black-cat {

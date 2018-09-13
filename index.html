@@ -20,8 +20,7 @@
         <img id="black-cat" src="assets/images/black_cat.png">
         <div class="h-50 text-center" id="cat-roster-box"></div>
         <hr class="my-4">
-
-
+        <h3 class="game-msg text-center" id="game-msg-text">Select your cats!</h3>
         <div class="jumbotron text-center rounded">
             <div class="fight-area">
                 <div class="row fight-headers">
@@ -35,12 +34,16 @@
                 </div>
                 <div class="row fight-box">
                     <div class="col-5" id="players-cat-box"></div>
-                    <h2 class="col-2 vs-text">VS</h2>
+                    <div class="col-2">
+                        <h2 class="vs-text">VS</h2>
+                        <button type="button" class="btn btn-secondary" id="atk-btn">Attack!</button>
+                    </div>
                     <div class="col-5" id="challenger-cat-box"></div>
                 </div>
             </div>
         </div>
-        <div class="text-center" id="defeated-cat-box">kek</div>
+        <h3 class="text-center">Defeated</h3>
+        <div class="text-center" id="defeated-cat-box"></div>
     </div>
 </body>
 
