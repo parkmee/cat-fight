@@ -42,29 +42,32 @@ var cats = {
         hp: 175,
         attack: 55,
     },
+
 }
 
 // cat arrays
 var catRoster = [];
 var playersCat = [];
-var defenderCat = [];
+var challengerCat = [];
 var defeatedCats = [];
 
 // initialize game with all cats in cat-roster box
 var newGame = true;
 var catRosterBox = $("#cat-roster-box");
 
+// function for new game
 if (newGame) {
-    // populate cat roster array
+    // populate cat roster array with all cat objects
     for (var i in cats) {
         catRoster.push(cats[i]);
     }
+    // populate screen with catRoster array contents
     showRosterLineup();
 }
 
-var counter = 0;
-
+// function to display cats in roster
 function showRosterLineup() {
+    // run the number of cats in the roster
     for (var j = 0; j < catRoster.length; j++) {
         // create new div elements with images for each cat in the roster
         var catRosterTile = $("<div>")
@@ -77,39 +80,117 @@ function showRosterLineup() {
     }
 }
 
+// link to player and challenger boxes on screen
 var playersCatBox = $("#players-cat-box");
+var challengerCatBox = $("#challenger-cat-box");
+var catRosterTile = $(".cat-roster-tile");
 
-// if player's cat is not assigned, select clicked cat for player and move picture/stats to players-cat-box
-$(".cat-roster-tile").on("click", function () {
-    console.log(catRoster.length);
-    for (var i = 0; i < catRoster.length; i++) {
-        if (playersCat.length === 0) {
-            console.log(this.id);
+function selectPlayer() {
+
+}
+var playerSelected = false;
+var challengerSelected = false;
+
+catRosterTile.on("click", function () {
+    if (playerSelected === false) {
+        for (var i = 0; i < catRoster.length; i++) {
             if (this.id === "cat-" + [i]) {
-                console.log(this.id + [i]);
                 playersCat.push(catRoster[i]);
-                console.log(catRoster[i]);
-                console.log(playersCat[0]);
                 var playersCatTile = $("<div>")
                     .addClass("border border-dark d-inline-block players-cat-tile")
                     .attr('id', "players-cat")
                     .html("<img src=assets/images/" + playersCat[0].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + playersCat[0].name + "</p><p class='cat-stats'>HP: " + playersCat[0].hp + "</p>");
                 playersCatBox.append(playersCatTile);
-                console.log(catRoster);
-                console.log(playersCat.length);
-                catRoster.splice(i,1);
-                console.log(catRoster);
-                catRosterBox.html("");
-                showRosterLineup();
+                catRoster.splice(i, 1);
+                
+                // remove selected cat tile from catRosterBox
+                $("#cat-"+i).remove();
             }
-        } else if (defenderCat.length === 0) {
-            // on subsequent clicks on cat, select clicked cat as challenger and move picture/stats to defender-area
-            console.log(this.id);
         }
-
+        playerSelected = true;
+        console.log(catRoster);
+    } else if (challengerSelected === false) {
+        console.log("level 2");
+        console.log(catRoster);
     }
 
-})
+/*     for (var j = 0; j < catRoster.length; j++) {
+        // create new div elements with images for each cat in the roster
+        var catRosterTile = $("<div>")
+            .addClass("border border-dark d-inline-block cat-roster-tile")
+            .attr('id', "cat-" + [j])
+            .html("<img src=assets/images/" + catRoster[j].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + catRoster[j].name + "</p><p class='cat-stats'>HP: " + catRoster[j].hp + "</p>");
+        console.log("inside");
+        catRosterBox.append(catRosterTile);
+    }
+ */    console.log("what");
+
+});
+
+/* // if player's cat is not assigned, select clicked cat for player and move picture/stats to players-cat-box
+catRosterTile.on("click", function () {
+    /*     if (playerSelected) {
+            // on subsequent clicks on cat, select clicked cat as challenger and move picture/stats to defender-area
+            console.log(this.id);
+            for (var i = 0; i < catRoster.length; i++) {
+                if (this.id === "cat-" + [i]) {
+                    console.log(this.id + " index: " + [i]);
+                    challengerCat.push(catRoster[i]);
+                    console.log(catRoster[i]);
+                    console.log(challengerCat[0]);
+                    var challengerCatTile = $("<div>")
+                        .addClass("border border-dark d-inline-block challenger-cat-tile")
+                        .attr('id', "challenger-cat")
+                        .html("<img src=assets/images/" + challengerCat[0].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + challengerCat[0].name + "</p><p class='cat-stats'>HP: " + challengerCat[0].hp + "</p>");
+                    challengerCatBox.append(challengerCatTile);
+                    console.log(catRoster);
+                    console.log(challengerCat.length);
+                    catRoster.splice(i, 1);
+                    console.log(catRoster);
+                    catRosterBox.html("");
+                    showRosterLineup();
+                }
+            }
+        } */
+
+
+/* $(".cat-roster-tile").on("click", function () {
+    if (playersCat.length == 0) {
+        for (var i = 0; i < catRoster.length; i++) {
+            if (this.id === "cat-" + [i]) {
+                playersCat.push(catRoster[i]);
+                var playersCatTile = $("<div>")
+                    .addClass("border border-dark d-inline-block players-cat-tile")
+                    .attr('id', "players-cat")
+                    .html("<img src=assets/images/" + playersCat[0].imgName + ".jpg class='cat-img'><p class='cat-stats cat-names'>" + playersCat[0].name + "</p><p class='cat-stats'>HP: " + playersCat[0].hp + "</p>");
+                playersCatBox.append(playersCatTile);
+                catRoster.splice(i, 1);
+                catRosterBox.html("");
+                showRosterLineup();
+                playerSelected = true;
+            }
+        } 
+    } else {
+        console.log("Hi");
+    }
+    console.log(catRoster.length);
+    console.log(playersCat.length);
+    console.log(challengerCat.length);
+    console.log(playerSelected);
+
+}); */
+
+
+
+
+
+
+
+
+
+
+
+
 // click attack button to damage challenger
 // challenger automatically counters attack
 // if player's cat's hp <= 0, player loses
@@ -118,8 +199,3 @@ $(".cat-roster-tile").on("click", function () {
 // click to select the next challenger from the cat-roster-box
 // if last challenger is defeated and catRoster is empty, player wins
 // show winning game message and reset
-
-console.log(cats.length);
-console.log(catRoster.length);
-console.log(catRoster);
-console.log(catRoster[1].name);
